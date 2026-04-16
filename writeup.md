@@ -14,7 +14,7 @@
 
 ``src/sorting.cpp ``
 
-Lines: 29-38
+Lines: 36-38
 
 ```c++
 int* copy_array(int* ar, int len) {
@@ -64,7 +64,7 @@ int* copy_array(int* ar, int len) {
 
 ``src/sorting.cpp ``
 
-Lines: 62-72
+Lines: 68-72
 
 ```c++
 void swap(int* a, int* b) {
@@ -110,24 +110,65 @@ void swap(int* a, int* b) {
 
 ### Location
 
-Line number(s) of the bugs.
+``src/sortin.cpp``
+
+Lines: 52-60
 
 ```c++
-Copy of the buggy code
+int min_index_of_array(int* ar, int len) {
+  /**
+ * Find the INDEX of the minimum value in ar. If there are multiple values that are
+ * the minimum, return the index of the first minimum.
+ * @param ar: The array to search through
+ * @param len: the number of elements in ar
+ * @return: The INDEX of the minimum value in ar
+ */
+
+  int min_index = 0;
+
+  for (int i = 1; i < len; ++i) {
+    if (ar[i] > ar[min_index]) {
+      min_index = i;
+    }
+  }
+  return ar[min_index];
+}
+
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+When writing the test cases, found that the return type / value that was being compared was the minimum value not the index of the minimum value
 
 ### Description
 
-Describe the bug
+Two issues with the code include the comparison being flipped
+(only updating the ``min_index`` if the value is greater than the current).
+Additionally, the returned value is not the index but the value. This could lead to issues 
+in the implementation of ``make_sorted()`` since values could be out of range
+of the array.
 
 ### Fix
 
-Explain how you fixed the bug
+The return now just returns the value of ``min_index``. This prevents potential out of index referencing within the function ``make_sorted()``. Also needed to flip the sign since the comparison made before checked if ``ar[i]`` was greater than current ``min_index``
 
 ```c++
-Copy of the fixed code
+int min_index_of_array(int* ar, int len) {
+  /**
+ * Find the INDEX of the minimum value in ar. If there are multiple values that are
+ * the minimum, return the index of the first minimum.
+ * @param ar: The array to search through
+ * @param len: the number of elements in ar
+ * @return: The INDEX of the minimum value in ar
+ */
+
+  int min_index = 0;
+
+  for (int i = 1; i < len; ++i) {
+    if (ar[i] < ar[min_index]) {
+      min_index = i;
+    }
+  }
+  return min_index;
+}
 ```

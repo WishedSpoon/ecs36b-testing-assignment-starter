@@ -13,7 +13,7 @@ TEST(MakeSortedTests, SimpleSortSortedArray) {
     int testArray[] = {1, 2, 3, 4, 5};
     int copyTestArray[] = {1, 2, 3, 4, 5};
 
-    make_sorted(testArray, 5); //4, 1, 2, 3, 5
+    make_sorted(testArray, 5);
     for (int i = 0; i < 5; ++i) {
         EXPECT_EQ(testArray[i], copyTestArray[i]);
     }

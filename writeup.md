@@ -62,26 +62,48 @@ int* copy_array(int* ar, int len) {
 
 ### Location
 
-Line number(s) of the bugs.
+``src/sorting.cpp ``
+
+Lines: 62-72
 
 ```c++
-Copy of the buggy code
+void swap(int* a, int* b) {
+  /**
+ * Swap the values held in a and b.
+ * @param a: The address of the first element to swap.
+ * @param b: The address of the second element to swap.
+ */
+
+  int* temp = a;
+  a = b;
+  b = temp;
+}
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+When doing simple tests on the function, the values were not being swapped.
 
 ### Description
 
-Describe the bug
+The function only swaps the memory address of the pointers instead of what values they reference. For the test of simple inputs (single integers) - it would not swap the values.
 
 ### Fix
 
-Explain how you fixed the bug
+Have the pointers dereferenced in the function to change the information stored at each pointer to swap them around.
 
 ```c++
-Copy of the fixed code
+void swap(int* a, int* b) {
+  /**
+ * Swap the values held in a and b.
+ * @param a: The address of the first element to swap.
+ * @param b: The address of the second element to swap.
+ */
+
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
 ```
 
 ### Bug 3

@@ -12,6 +12,9 @@ TEST(SwapTests, SimpleSwapTwoValues) {
     /*
      * Swap two values and see if the swap was successful.
      */
+    int value1 = 10;
+    int value2 = 20;
+    EXCEPT_EQ(swap(&value1, &value2), value1 == 20) << "Swap failed";
 }
 
 TEST(SwapTests, SimpleSwapValuesInArray) {
